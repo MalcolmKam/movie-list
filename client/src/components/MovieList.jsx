@@ -6,8 +6,6 @@ const MovieList = ({list, setList}) => {
   }
   return (
     <div>
-      <button>Watched</button>
-      <button>To Watch</button>
       <ul>
     {list.map((item) => (
       <MovieListEntry item={item} setList={setList}/>
