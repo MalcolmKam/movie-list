@@ -50,13 +50,13 @@ const App = (props) => {
     }
   }
 
-  //create a toggle for watched status
-  const [watchedStatus, setWatchStatus] = useState(false);
+  // //create a toggle for watched status
+  // const [watchedStatus, setWatchStatus] = useState(false);
 
-  // const toggleWatchStatus = (movie) => {
-  //   setWatchStatus(!watchedStatus);
-  //   return movie.watch = !movie.watch;
-  // }
+  // // const toggleWatchStatus = (movie) => {
+  // //   setWatchStatus(!watchedStatus);
+  // //   return movie.watch = !movie.watch;
+  // // }
 
   const toggleWatchStatus = (index) => {
     const updatedMovies = [...userMovies];
@@ -71,7 +71,7 @@ const App = (props) => {
     <div className="title">Movie List</div>
     <AddMovie updateMovies={updateMovies}/>
     <SearchBar callBackF={search} goBack={goBack}/>
-    <MovieList list={list} setList={setList} watchedStatus={watchedStatus} setWatchStatus={setWatchStatus}/>
+    <MovieList list={list} setList={setList}/>
   </div>
   )
 };
