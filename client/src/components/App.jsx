@@ -46,10 +46,28 @@ const App = (props) => {
     newMovie.title = inputVal;
     newMovie.watched = false;
     if (!(userMovies.some((item) => item.title === newMovie.title))) {
-      setUserMovies((userMovies) => [...userMovies, newMovie]);
+      setUserMovies(() => [...userMovies, newMovie]);
     }
   }
 
+  const updateWatchedStatus = (title, newWatched) => {
+    const updatedMovies = userMovies.map((movie) =>
+      movie.title === title ? { ...movie, watched: newWatched } : movie
+    );
+    setUserMovies(updatedMovies);
+  };
+
+  //function to filter list to only watched
+  const filterWatched = () => {
+    let watchedMovies = userMovies.filter((movie) => movie.watched === true);
+    setList(watchedMovies);
+  }
+
+  //function to filter list to only unwatched
+  const filterUnwatched = () => {
+    let unwatchedMovies = userMovies.filter((movie) => movie.watched === false);
+    setList(unwatchedMovies);
+  }
 
 //Primary structure
 
@@ -59,10 +77,10 @@ const App = (props) => {
     <AddMovie updateMovies={updateMovies}/>
     <SearchBar callBackF={search} goBack={goBack}/>
     <div>
-      <button>Watched</button>
-      <button>To Watch</button>
+      <button onClick={filterWatched}>Watched</button>
+      <button onClick={filterUnwatched}>To Watch</button>
     </div>
-    <MovieList list={list} setList={setList}/>
+    <MovieList list={list} setWatchedStatus={updateWatchedStatus}/>
   </div>
   )
 };

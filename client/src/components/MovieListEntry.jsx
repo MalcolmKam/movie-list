@@ -1,16 +1,16 @@
 import React from 'react';
-const MovieListEntry = ({item, setList}) => {
+const MovieListEntry = ({item, setWatchedStatus}) => {
 const { useState } = React;
-const [watched, setWatched] = useState(false);
 
   const toggleWatchStatus = () => {
-    setWatched(!watched);
+    let newWatched = !item.watched
+    setWatchedStatus(item.title, newWatched)
   };
   return (
   <li>
     {item.title}
     <button id="watched" onClick={toggleWatchStatus}>
-      {watched ? 'watched' : 'unwatched'}
+      {item.watched ? 'watched' : 'unwatched'}
     </button>
   </li>
 )}

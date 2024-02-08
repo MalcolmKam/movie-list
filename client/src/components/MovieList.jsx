@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieListEntry from './MovieListEntry.jsx'
-const MovieList = ({list, setList}) => {
+const MovieList = ({list, setWatchedStatus}) => {
   if (list.length === 0) {
     return <div>There are no movies in the list</div>
   }
@@ -8,7 +8,7 @@ const MovieList = ({list, setList}) => {
     <div>
       <ul>
     {list.map((item) => (
-      <MovieListEntry item={item} setList={setList}/>
+      <MovieListEntry item={item} setWatchedStatus={setWatchedStatus}/>
     ))}
   </ul>
     </div>
