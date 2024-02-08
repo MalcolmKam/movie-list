@@ -2,7 +2,7 @@ body {
   font-family: sans-serif, arial;
 }
 
-.title {
+#watched {
   text-align: center;
   background-color: lightblue;
  }

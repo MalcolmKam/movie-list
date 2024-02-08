@@ -2,23 +2,24 @@ import React from 'react';
 import MovieList from './MovieList.jsx';
 import MovieListEntry from './MovieListEntry.jsx';
 import SearchBar from './SearchBar.jsx';
-import AddMovie from './AddMovie.jsx'
-
-var movies = [
-  { title: 'Mean Girls' },
-  { title: 'Hackers' },
-  { title: 'The Grey' },
-  { title: 'Sunshine' },
-  { title: 'Ex Machina' },
-];
-
-var userMovies = [];
+import AddMovie from './AddMovie.jsx';
 
 
 const App = (props) => {
   const { useState } = React;
+  const { useEffect } = React;
 
-  const [list, setList] = useState(userMovies);
+
+  //to update user data
+  const [userMovies, setUserMovies] = useState([]);
+
+  //to update list
+  const [list, setList] = useState([userMovies]);
+
+  //create a useEffect so that the setList updates whenever userMovies updates
+  useEffect(() => {
+    setList(userMovies)
+  }, [userMovies]);
 
   //add function to allow search button to change rendered list
   const search = () => {
@@ -27,11 +28,11 @@ const App = (props) => {
       setList(userMovies);
     }
     //return new list containing all movies that match search regardless of capitalization
-    let filtered = list.filter((item) => item.title.toUpperCase().indexOf(inputVal.toUpperCase()) !== -1)
+    let filtered = userMovies.filter((item) => item.title.toUpperCase().indexOf(inputVal.toUpperCase()) !== -1)
     if (filtered.length > 0) {
       setList(filtered);
     } else {
-      setList([{title: 'Sorry, no results found matching search'}])
+      alert('Sorry! No matching results found')
     }
   };
 
@@ -43,17 +44,34 @@ const App = (props) => {
     let newMovie = {};
     let inputVal = document.getElementById("addMovie").value;
     newMovie.title = inputVal;
+    newMovie.watched = false;
     if (!(userMovies.some((item) => item.title === newMovie.title))) {
-      userMovies.push(newMovie);
+      setUserMovies((userMovies) => [...userMovies, newMovie]);
     }
   }
+
+  //create a toggle for watched status
+  const [watchedStatus, setWatchStatus] = useState(false);
+
+  // const toggleWatchStatus = (movie) => {
+  //   setWatchStatus(!watchedStatus);
+  //   return movie.watch = !movie.watch;
+  // }
+
+  const toggleWatchStatus = (index) => {
+    const updatedMovies = [...userMovies];
+    updatedMovies[index].watched = !updatedMovies[index].watched;
+    setUserMovies(updatedMovies);
+  };
+
+//Primary structure
 
   return (
   <div>
     <div className="title">Movie List</div>
     <AddMovie updateMovies={updateMovies}/>
     <SearchBar callBackF={search} goBack={goBack}/>
-    <MovieList list={list} setList={setList}/>
+    <MovieList list={list} setList={setList} watchedStatus={watchedStatus} setWatchStatus={setWatchStatus}/>
   </div>
   )
 };
