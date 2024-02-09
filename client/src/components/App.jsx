@@ -77,8 +77,8 @@ const App = (props) => {
     <AddMovie updateMovies={updateMovies}/>
     <SearchBar callBackF={search} goBack={goBack}/>
     <div>
-      <button onClick={filterWatched}>Watched</button>
-      <button onClick={filterUnwatched}>To Watch</button>
+      <button class="watched" onClick={filterWatched}>Watched</button>
+      <button class="toWatch" onClick={filterUnwatched}>To Watch</button>
     </div>
     <MovieList list={list} setWatchedStatus={updateWatchedStatus}/>
   </div>

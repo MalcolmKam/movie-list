@@ -1,13 +1,65 @@
 body {
   font-family: sans-serif, arial;
+  background: mintcream;
 }
+
 
 #watched {
   text-align: center;
-  background-color: lightblue;
- }
+  background-color: aliceblue;
+  border-radius: 15px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 .list {
   border: solid;
-  color: purple
+  background: powderblue;
+  color: black;
+  text-align: center;
+  list-style-type: none;
+  padding: 5px;
+  margin-left: -40px;
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-family: system-ui;
+  font-size: large;
+  text-align: center;
+  border: solid;
+  background-color: cornflowerblue;
+}
+
+.noResult {
+  text-align: center;
+  background: lightcoral;
+}
+
+.watched {
+  font-size: large;
+  margin-top: 15px;
+  margin-left: 40%;
+}
+
+#addMovie {
+  margin-left: 37%;
+  margin-top: 15px;
+}
+
+.toWatch {
+  font-size: large;
+  margin-top: 15px;
+}
+
+.search {
+  margin-left: 37%;
 }

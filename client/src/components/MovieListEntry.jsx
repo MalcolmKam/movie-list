@@ -7,7 +7,7 @@ const { useState } = React;
     setWatchedStatus(item.title, newWatched)
   };
   return (
-  <li>
+  <li class="list">
     {item.title}
     <button id="watched" onClick={toggleWatchStatus}>
       {item.watched ? 'watched' : 'unwatched'}
