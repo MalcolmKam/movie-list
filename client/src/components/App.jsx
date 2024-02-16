@@ -3,6 +3,7 @@ import MovieList from './MovieList.jsx';
 import MovieListEntry from './MovieListEntry.jsx';
 import SearchBar from './SearchBar.jsx';
 import AddMovie from './AddMovie.jsx';
+import axios from 'axios';
 
 
 const App = (props) => {
