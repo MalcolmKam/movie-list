@@ -17,6 +17,13 @@ const App = (props) => {
   //to update list
   const [list, setList] = useState([userMovies]);
 
+  //uttilize useEffect hook to make a get request after App has mounted
+  useEffect(() => {
+    axios.get('/movies').then((response) => setUserMovies(response.data)).catch(error => {
+      console.error('error getting data');
+    })
+  }, [])
+
   //create a useEffect so that the setList updates whenever userMovies updates
   useEffect(() => {
     setList(userMovies)
@@ -45,9 +52,18 @@ const App = (props) => {
     let newMovie = {};
     let inputVal = document.getElementById("addMovie").value;
     newMovie.title = inputVal;
-    newMovie.watched = false;
+    newMovie.watched = 0;
     if (!(userMovies.some((item) => item.title === newMovie.title))) {
-      setUserMovies(() => [...userMovies, newMovie]);
+      // setUserMovies(() => [...userMovies, newMovie]);
+      axios.post('/movies', {title: newMovie.title}).then((response) => {
+        console.log('Movie added!');
+      })
+      .catch((error) => {
+        console.error('Error adding movie')
+      });
+      axios.get('/movies').then((response) => setUserMovies(response.data)).catch((error) => {
+        console.error('Error adding movie')
+      });
     }
   }
 
@@ -60,13 +76,13 @@ const App = (props) => {
 
   //function to filter list to only watched
   const filterWatched = () => {
-    let watchedMovies = userMovies.filter((movie) => movie.watched === true);
+    let watchedMovies = userMovies.filter((movie) => movie.watched === 1);
     setList(watchedMovies);
   }
 
   //function to filter list to only unwatched
   const filterUnwatched = () => {
-    let unwatchedMovies = userMovies.filter((movie) => movie.watched === false);
+    let unwatchedMovies = userMovies.filter((movie) => movie.watched === 0);
     setList(unwatchedMovies);
   }
 
@@ -78,8 +94,8 @@ const App = (props) => {
     <AddMovie updateMovies={updateMovies}/>
     <SearchBar callBackF={search} goBack={goBack}/>
     <div>
-      <button class="watched" onClick={filterWatched}>Watched</button>
-      <button class="toWatch" onClick={filterUnwatched}>To Watch</button>
+      <button className="watched" onClick={filterWatched}>Watched</button>
+      <button className="toWatch" onClick={filterUnwatched}>To Watch</button>
     </div>
     <MovieList list={list} setWatchedStatus={updateWatchedStatus}/>
   </div>
