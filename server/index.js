@@ -28,7 +28,7 @@ app.get('/movies', (req, res) => {
 app.use(express.json());
 
 app.post('/movies', (req, res) => {
-  connection.query('INSERT INTO movies (title) VALUES (?)', req.body.title, (err, results) => {
+  connection.query('INSERT INTO movies (title) VALUES (?)', [req.body.title], (err, results) => {
     if (err) {
       console.log('unable to add movie to database: ', err);
       res.sendStatus(500);

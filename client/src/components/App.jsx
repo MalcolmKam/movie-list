@@ -56,7 +56,7 @@ const App = (props) => {
     if (!(userMovies.some((item) => item.title === newMovie.title))) {
       // setUserMovies(() => [...userMovies, newMovie]);
       axios.post('/movies', {title: newMovie.title}).then((response) => {
-        console.log('Movie added!');
+        console.log(response);
       })
       .catch((error) => {
         console.error('Error adding movie')
